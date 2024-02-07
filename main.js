@@ -19,7 +19,7 @@ function getComputerChoice() {
     }
     else {
         choice = "scissors";
-        console.log("Computer Played "+ choice +".")
+        console.log("Computer Played: "+ choice)
         return choice;
     }
 }
@@ -33,17 +33,11 @@ function playOneRound(playerSelection, computerSelection){
     else if (playerSelection === "rock" && computerSelection === "paper") {
         winner = "Computer";
     }
-    else if (playerSelection === "rock" && computerSelection === "rock") {
-        winner = "Draw";
-    }
     else if (playerSelection === "paper" && computerSelection === "scissors") {
         winner = "Computer";
     }
     else if (playerSelection === "paper" && computerSelection === "rock") {
         winner = "Player";
-    }
-    else if (playerSelection === "paper" && computerSelection === "paper") {
-        winner = "Draw";
     }
     else if (playerSelection === "scissors" && computerSelection === "rock") {
         winner = "Computer";
@@ -51,7 +45,7 @@ function playOneRound(playerSelection, computerSelection){
     else if (playerSelection === "scissors" && computerSelection === "paper") {
         winner = "Player";
     }
-    else if (playerSelection === "scissors" && computerSelection === "scissors") {
+    else if (playerSelection === computerSelection) {
         winner = "Draw";
     }
     // returning winner of the round
@@ -63,6 +57,7 @@ function validatingPlayerTurn(playerChoice) {
         alert("Oops. Invalid Choice. Tray Again.")
         playerChoice = prompt("Enter Choice: ").toLowerCase();
     }
+    console.log("You Played: " + playerChoice);
     return playerChoice;
     
 }
@@ -80,14 +75,10 @@ function playGame (){
         let playerTurn = prompt("Enter Choice: ");
          // making the player choice all lower case
         let playerChoice = playerTurn.toLowerCase();
-        // resetting player choice to a valid choice using validation function
-        playerChoice = validatingPlayerTurn(playerChoice);
-        console.log("You Played " + playerChoice + ".");
-        // calling getComputerChoice function
-        let computerChoice = getComputerChoice();
         // initializing winner then assigning it to the winner of the round
         let winner = "No One";
-        winner = playOneRound(playerChoice, computerChoice);
+        // playing one round and using the player validation function and get computer choice function as parameters
+        winner = playOneRound(validatingPlayerTurn(playerChoice), getComputerChoice());
         // adding total wins for player and computer
         if (winner === "Player") {
             playerWins += 1;
@@ -106,17 +97,20 @@ function playGame (){
     // getting total winner by comparing wins for both player and computer then returning that winner
     if (playerWins > computerWins) {
         totalWinner = "Player";
-        return totalWinner;
+        console.log("Winner of the Game is: " + totalWinner);
+        return 0;
     }
     else if (computerWins > playerWins) {
         totalWinner = "Computer";
-        return totalWinner;
+        console.log("Winner of the Game is: " + totalWinner);
+        return 0;
     }
     else {
         totalWinner = "Draw";
-        return totalWinner;
+        console.log("Winner of the Game is: " + totalWinner);
+        return 0;
     }
 }
 
 // calling playGame method which plays 5 rounds and announces the overall winner
-console.log("Winner for the Game is: " + playGame());
+playGame();
