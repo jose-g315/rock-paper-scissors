@@ -1,4 +1,5 @@
-// rock paper scissors file
+// jose-g315
+// rock paper scissors game logic
 
 // function to get computer choice
 function getComputerChoice() {
