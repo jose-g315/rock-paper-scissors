@@ -1,4 +1,7 @@
 /*styles for the rock-paper-scissors UI*/
+body {
+    background-color: whitesmoke;
+}
 * {
     margin: 0;
     padding: 0;
@@ -6,26 +9,30 @@
 }
 div {
     margin: 20px;
-    
 }
-h1 {
+button {
+    margin: 5px;
+    height: 30px;
+    width: 70px;
+}
+
+/* header */
+.header {
     text-align: center;
 }
-h2 {
-    text-align: center;
-}
-.container {
+/* scores */
+.score-container {
     display: flex;
     height: 200px;
     justify-content: center;
-    font-size: 25px;
+    font-size: 1.75rem;
 }
 .card {
     width: 250px;
     text-align: center;
 }
 .score {
-    font-size: 55px;
+    font-size: 3rem;
 }
 .player {
     color: blue;
@@ -33,18 +40,32 @@ h2 {
 .computer {
     color: red;
 }
-.winner {
-    text-align: start;
+/* choices */
+.choice-container {
+    display: flex;
+    justify-content: center;
 }
-.first{
-    text-align: end;
+.choice-display {
+    width: 500px;
+    text-align: center;
+    font-size: 2.5rem;
+}
+.player-choice, .computer-choice {
+    font-weight: 900;
 }
 .player-choices {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 }
-button {
-    margin: 5px;
-    height: 30px;
-    width: 80px;
+/* winner */
+.winner-container {
+    display: flex;
+    justify-content: center;
+    font-size: 2.5rem;
 }
+.winner {
+    text-align: start;
+}
+
+
+

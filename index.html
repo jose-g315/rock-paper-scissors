@@ -11,7 +11,7 @@
         <h1>Rock Paper Scissors</h1>
         <h2>First Player to Five Points Wins</h2>
     </div>
-    <div class="container">
+    <div class="score-container">
         <div class="card">Player Wins
             <div class="score player">0</div>
         </div>
@@ -22,20 +22,22 @@
             <div class="score computer">0</div>
         </div>
     </div>
-    <div class="container">
-        <div class="player-choices">Pick Your Choice:
-            <button class="rock">Rock</button>
-            <button class="paper">Paper</button>
-            <button class="scissors">Scissors</button>
+    <div class="choice-container">
+        <div class="choice-display">Pick Your Choice:
             <div class="player-choice"></div>
+            <div class="player-choices">
+                <button class="rock">Rock</button>
+                <button class="paper">Paper</button>
+                <button class="scissors">Scissors</button>
+            </div>
         </div>
-        <div class="computerChoice">Computer Played:
+        <div class="choice-display">Computer Played:
             <div class="computer-choice"></div>
         </div>
     </div>
-    <div class="container">
-        <div class="card first">Winner is: </div>
-        <div class="winner card"></div>
+    <div class="winner-container">
+        <div>Winner is: </div>
+        <div class="winner"></div>
     </div>
     <script src="main.js"></script>
 </body>
