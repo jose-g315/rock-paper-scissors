@@ -1,44 +1,30 @@
 // jose-g315
 // rock paper scissors game logic and UI DOM manipulation
 
+// initializing global variables for the game
+let playerWins = 0;
+let computerWins = 0;
+let draws = 0;
+
+const rock = 0;
+const paper = 1;
+const scissors = 2;
+
+const playerScore = document.querySelector(".player");
+const computerScore = document.querySelector(".computer");
+const drawScore = document.querySelector(".draw");
+const gameWinner = document.querySelector(".winner");
+
+const playerChoices = document.querySelector(".player-choices");
+
 function getComputerChoice() {
-    let choice;
-    const computerChoice = document.querySelector(".choice"); 
     // generating random number between 0-2
-    let number = Math.floor(Math.random() * (2 - 0 + 1) + 0)
-    if (number === 0) {
-        choice = "rock";
-        computerChoice.textContent = "Rock";
-        return choice;
-    }
-    else if (number === 1) {
-        choice = "paper";
-        computerChoice.textContent = "Paper";
-        return choice;
-    }
-    else {
-        choice = "scissors";
-        computerChoice.textContent = "Scissors";
-        return choice;
-    }
+    // 0 = rock 1 = paper 2 = scissors
+    return Math.floor(Math.random() * 3);
 }
-function playOneRound(playerSelection, computerSelection){
-    let winner = "Nobody";
-    if (playerSelection === "rock" && computerSelection === "scissors") {
-        winner = "Player";
-    }
-    else if (playerSelection === "paper" && computerSelection === "rock") {
-        winner = "Player";
-    }
-    else if (playerSelection === "scissors" && computerSelection === "paper") {
-        winner = "Player";
-    }
-    else if (playerSelection === computerSelection) {
-        winner = "Draw";
-    }
-    else {
-        winner = "Computer"
-    }
+function playOneRound(playerChoice, computerChoice){
+    // 0 = tie / 1 = player wins / 2 = computer wins
+    let winner = (3 + (playerChoice - computerChoice)) % 3;   
     return winner;
 }
 
@@ -49,14 +35,30 @@ function resetGame(){
     playerScore.textContent = "0";
     computerScore.textContent = "0";
     drawScore.textContent = "0";
+    
 }
-
+// setting the default parameter of player to 1(human)
+function displayChoice(choice, player = 1){
+    const playerDisplay = document.querySelector(".player-choice");
+    const computerDisplay = document.querySelector(".computer-choice");
+    switch(choice){
+        case 0:
+            player === 1 ? playerDisplay.textContent = "Rock" : computerDisplay.textContent = "Rock" ;
+            break;
+        case 1:
+            player === 1 ? playerDisplay.textContent = "Paper" : computerDisplay.textContent = "Paper";
+            break;
+        case 2: 
+            player === 1 ? playerDisplay.textContent = "Scissors" : computerDisplay.textContent = "Scissors" ;
+            break; 
+    }
+}
 function updateGameScores(winner){
-    if (winner === "Player") {
+    if (winner === 1) {
         playerWins += 1;
         playerScore.textContent = playerWins;
     }
-    else if (winner === "Computer") {
+    else if (winner === 2) {
         computerWins += 1;
         computerScore.textContent = computerWins;
     }
@@ -78,29 +80,24 @@ function updateGameScores(winner){
         gameWinner.textContent ="";
     }
 }
-// initializing variables for the game
-let playerWins = 0;
-let computerWins = 0;
-let draws = 0;
 
-const playerScore = document.querySelector(".player");
-const computerScore = document.querySelector(".computer");
-const drawScore = document.querySelector(".draw");
-const gameWinner = document.querySelector(".winner");
-
-const rockButton = document.querySelector(".rock");
-const paperButton = document.querySelector(".paper");
-const scissorsButton = document.querySelector(".scissors");
-// event listeners for each button
-rockButton.addEventListener("click", () => {
-    updateGameScores(playOneRound("rock",getComputerChoice()));
-    });
-
-paperButton.addEventListener("click", () => {
-    updateGameScores(playOneRound("paper",getComputerChoice()));
-    });
-
-scissorsButton.addEventListener("click", () => {
-    updateGameScores(playOneRound("scissors",getComputerChoice()));
-    });       
+playerChoices.addEventListener("click", (e) => {
     
+    let computerChoice = getComputerChoice();
+    displayChoice(computerChoice,2);
+
+    switch (e.target.className) {
+        case "rock":
+            displayChoice(rock);
+            updateGameScores(playOneRound(rock, computerChoice));
+            break;
+        case "paper":
+            displayChoice(paper)
+            updateGameScores(playOneRound(paper, computerChoice));
+            break;
+        case "scissors":
+            displayChoice(scissors);
+            updateGameScores(playOneRound(scissors, computerChoice));
+            break;
+    }
+})
